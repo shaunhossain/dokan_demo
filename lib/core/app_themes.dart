@@ -11,21 +11,18 @@ class AppTheme {
       brightness: Brightness.light,
       splashColor: LightModeColor.primary.color,
       scaffoldBackgroundColor: LightModeColor.primary.color,
-      navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: LightModeColor.white.color,
-        indicatorColor: LightModeColor.white.color,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: LightModeColor.white.color,
-          elevation: 0,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
           selectedItemColor: LightModeColor.activeBottomNavIcon.color,
           unselectedItemColor: LightModeColor.inactiveBottomNavIcon.color,
           landscapeLayout: BottomNavigationBarLandscapeLayout.centered
-      )
+      ),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      shape: CircularNotchedRectangle(),
+      color: Colors.transparent,
+      elevation: 2,
+      padding: EdgeInsets.zero,
+    )
   );
 
   static final darkTheme = ThemeData(
@@ -33,25 +30,18 @@ class AppTheme {
     brightness: Brightness.light,
     splashColor: LightModeColor.primary.color,
     scaffoldBackgroundColor: LightModeColor.primary.color,
-    // navigationBarTheme: NavigationBarThemeData(
-    //   backgroundColor: LightModeColor.secondaryDark.color,
-    //   indicatorColor: LightModeColor.secondaryLight.color,
-    //   labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-    //   labelTextStyle: MaterialStateProperty.all(ibmPlexSansBMStyle(LightModeColor.highlight.color)),
-    //   iconTheme: MaterialStateProperty.all(IconThemeData(
-    //     color: LightModeColor.highlight.color
-    //   ))
-    // ),
-    // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    //     backgroundColor: LightModeColor.white.color,
-    //     elevation: 0,
-    //     type: BottomNavigationBarType.fixed,
-    //     showSelectedLabels: true,
-    //     showUnselectedLabels: true,
-    //     selectedItemColor: LightModeColor.secondaryLight.color,
-    //     unselectedItemColor: LightModeColor.grey.color,
-    //     landscapeLayout: BottomNavigationBarLandscapeLayout.centered
-    // )
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: LightModeColor.white.color,
+          selectedItemColor: LightModeColor.activeBottomNavIcon.color,
+          unselectedItemColor: LightModeColor.inactiveBottomNavIcon.color,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.centered
+      ),
+      bottomAppBarTheme: const BottomAppBarTheme(
+        shape: CircularNotchedRectangle(),
+        color: Colors.transparent,
+        elevation: 2,
+        padding: EdgeInsets.zero,
+      )
   );
 
   static Brightness get currentSystemBrightness =>

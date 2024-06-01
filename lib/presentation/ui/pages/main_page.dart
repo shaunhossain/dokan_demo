@@ -1,4 +1,6 @@
+import 'package:dokan_demo/core/app_colors.dart';
 import 'package:dokan_demo/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:dokan_demo/presentation/ui/widgets/bottom_nav/bottom_nav_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,8 +21,12 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
+  int selectedIndex = 0;
 
   void navRoute(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
     widget.navigationShell.goBranch(
       index,
       initialLocation: index == widget.navigationShell.currentIndex,
@@ -35,60 +41,85 @@ class _MainPageState extends State<MainPage> {
         child: Scaffold(
           key: _scaffoldKey,
           body: widget.navigationShell,
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: state.tabIndex,
-            destinations: [
-              NavigationDestination(
-                icon: SvgPicture.asset(
-                  "assets/home_icon.svg",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                label: 'Home',
-              ),
-              NavigationDestination(
-                icon: SvgPicture.asset(
-                  "assets/category_icon.svg",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                label: 'Category',
-              ),
-              NavigationDestination(
-                icon: SvgPicture.asset(
-                  "assets/search_nav_icon.svg",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                label: 'Search',
-              ),
-              NavigationDestination(
-                icon: SvgPicture.asset(
-                  "assets/cart_icon.svg",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                label: 'Cart',
-              ),
-              NavigationDestination(
-                icon: SvgPicture.asset(
-                  "assets/profile_icon.svg",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.scaleDown,
-                ),
-                label: 'Profile',
-              ),
-            ],
-            onDestinationSelected: (index) {
-              context
-                  .read<BottomNavigationBloc>()
-                  .add(BottomNavigationEvent.tabChange(index));
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              navRoute(2);
             },
+            tooltip: 'Search',
+            elevation: 2.0,
+            shape: const CircleBorder(),
+            child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle, // circular shape
+              gradient: LinearGradient(
+                colors: [
+                  LightModeColor.linerFirst.color,
+                  LightModeColor.linerSecond.color,
+                ],
+              ),
+            ),
+            child:SvgPicture.asset(
+              "assets/search_nav_icon.svg",
+              width: 22,
+              height: 22,
+              fit: BoxFit.scaleDown,
+              color: Colors.white,
+            ),
+          ),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            notchMargin: 8,
+            clipBehavior: Clip.hardEdge,
+            child: Card(
+              color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+              margin: EdgeInsets.zero,
+              elevation: 2,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12))),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  BottomNavItem(
+                      onPress: () {
+                        navRoute(0);
+                      },
+                      icon: "assets/home_icon.svg",
+                      index: 0,
+                      selectedIndex: selectedIndex),
+                  BottomNavItem(
+                      onPress: () {
+                        navRoute(1);
+                      },
+                      icon: "assets/category_icon.svg",
+                      index: 1,
+                      selectedIndex: selectedIndex),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  BottomNavItem(
+                      onPress: () {
+                        navRoute(3);
+                      },
+                      icon: "assets/cart_icon.svg",
+                      index: 3,
+                      selectedIndex: selectedIndex),
+                  BottomNavItem(
+                      onPress: () {
+                        navRoute(4);
+                      },
+                      icon: "assets/profile_icon.svg",
+                      index: 4,
+                      selectedIndex: selectedIndex),
+                ],
+              ),
+            ),
           ),
         ),
       );
