@@ -31,63 +31,65 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
         builder: (context, state) {
-      return Scaffold(
-        key: _scaffoldKey,
-        body: widget.navigationShell,
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: state.tabIndex,
-          destinations: [
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                "assets/home_icon.svg",
-                width: 20,
-                height: 20,
-                fit: BoxFit.scaleDown,
+      return SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          body: widget.navigationShell,
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: state.tabIndex,
+            destinations: [
+              NavigationDestination(
+                icon: SvgPicture.asset(
+                  "assets/home_icon.svg",
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.scaleDown,
+                ),
+                label: 'Home',
               ),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                "assets/category_icon.svg",
-                width: 20,
-                height: 20,
-                fit: BoxFit.scaleDown,
+              NavigationDestination(
+                icon: SvgPicture.asset(
+                  "assets/category_icon.svg",
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.scaleDown,
+                ),
+                label: 'Category',
               ),
-              label: 'Category',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                "assets/search_icon.svg",
-                width: 20,
-                height: 20,
-                fit: BoxFit.scaleDown,
+              NavigationDestination(
+                icon: SvgPicture.asset(
+                  "assets/search_nav_icon.svg",
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.scaleDown,
+                ),
+                label: 'Search',
               ),
-              label: 'Search',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                "assets/cart_icon.svg",
-                width: 20,
-                height: 20,
-                fit: BoxFit.scaleDown,
+              NavigationDestination(
+                icon: SvgPicture.asset(
+                  "assets/cart_icon.svg",
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.scaleDown,
+                ),
+                label: 'Cart',
               ),
-              label: 'Cart',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                "assets/profile_icon.svg",
-                width: 20,
-                height: 20,
-                fit: BoxFit.scaleDown,
+              NavigationDestination(
+                icon: SvgPicture.asset(
+                  "assets/profile_icon.svg",
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.scaleDown,
+                ),
+                label: 'Profile',
               ),
-              label: 'Profile',
-            ),
-          ],
-          onDestinationSelected: (index) {
-            context
-                .read<BottomNavigationBloc>()
-                .add(BottomNavigationEvent.tabChange(index));
-          },
+            ],
+            onDestinationSelected: (index) {
+              context
+                  .read<BottomNavigationBloc>()
+                  .add(BottomNavigationEvent.tabChange(index));
+            },
+          ),
         ),
       );
     }, listener: (context, state) {
