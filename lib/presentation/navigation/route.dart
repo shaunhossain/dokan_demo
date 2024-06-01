@@ -26,7 +26,7 @@ GlobalKey<NavigatorState>(debugLabel: 'shellSearch');
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: PagesName.homePage.path,
+  initialLocation: PagesName.loginPage.path,
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

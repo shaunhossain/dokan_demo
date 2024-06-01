@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BottomNavItem extends StatelessWidget {
@@ -19,8 +20,8 @@ class BottomNavItem extends StatelessWidget {
       onPressed: onPress,
       icon: SvgPicture.asset(
         icon,
-        width: 22,
-        height: 22,
+        width: 22.w,
+        height: 22.h,
         fit: BoxFit.fill,
         color: index == selectedIndex
             ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
