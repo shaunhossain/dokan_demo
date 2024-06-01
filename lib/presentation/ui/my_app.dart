@@ -1,3 +1,4 @@
+import 'package:dokan_demo/core/app_themes.dart';
 import 'package:dokan_demo/injection.dart';
 import 'package:dokan_demo/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:dokan_demo/presentation/navigation/route.dart';
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Dokan',
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.light,
         routerConfig: router,
       ),
