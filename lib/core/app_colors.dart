@@ -6,6 +6,7 @@ import 'dart:ui';
 enum LightModeColor{
   primary(Color(0xFFE5E5E5)),
   black(Color(0xFF000000)),
+  mailText(Color(0xFF535353)),
   button(Color(0xFFF75F55)),
   shadowStroke(Color(0xFF979797)),
   text(Color(0xFF383C40)),

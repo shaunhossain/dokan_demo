@@ -165,7 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           minWidth: double.maxFinite,
                           height: 60.h,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go(PagesName.homePage.path);
+                          },
                           child: Text(
                             "Login",
                             style: robotoBLMediumStyle(Colors.white),

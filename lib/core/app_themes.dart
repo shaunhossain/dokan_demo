@@ -12,6 +12,7 @@ class AppTheme {
       brightness: Brightness.light,
       splashColor: LightModeColor.primary.color,
       scaffoldBackgroundColor: LightModeColor.primary.color,
+      primaryColor: LightModeColor.primary.color,
 
       cardTheme: CardTheme(
         elevation: 2,

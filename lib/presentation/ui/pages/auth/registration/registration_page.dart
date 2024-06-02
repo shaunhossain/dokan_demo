@@ -50,90 +50,75 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 height: 50.h,
               ),
               SizedBox(
-                width: double.maxFinite,
+                width: 120.w,
+                height: 120.h,
                 child: Stack(
-                  fit: StackFit.passthrough,
                   children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Card(
-                              elevation: 1,
-                              shape: const CircleBorder(),
-                              child: Stack(
-                                children: [
-                                  CircleAvatar(
-                                      radius: 50,
-                                      backgroundColor: Colors.white,
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: ClipOval(
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                            "",
-                                            fit: BoxFit.cover,
-                                            placeholder: (context, url) => Center(
-                                                child: SizedBox(
-                                                    width: 16.w,
-                                                    height: 16.h,
-                                                    child:
-                                                    const CircularProgressIndicator(
-                                                      strokeWidth: 1,
-                                                    ))),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    SvgPicture.asset(
-                                                        'assets/avatar_icon.svg',
-                                                      width: 25.w,
-                                                      height: 31.h,
-                                                      fit: BoxFit.scaleDown,
-                                                    ),
-                                          ),
-                                        ),
-                                      )),
-                                  Positioned(
-                                    right: 0,
-                                    bottom: 0,
-                                    child: InkWell(
-                                      onTap: () {
-                                       // chooseImage();
-                                      },
-                                      child: Container(
-                                        width: 34.w,
-                                        height: 34.h,
-                                        padding: const EdgeInsets.all(4),
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle, // circular shape
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              LightModeColor.linerFirst.color,
-                                              LightModeColor.linerSecond.color,
-                                            ],
-                                          ),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.grey,
-                                              offset: Offset(0.0, 1.0), //(x,y)
-                                              blurRadius: 6.0,
-                                            ),
-                                          ],
-                                        ),
-                                        child: SvgPicture.asset(
-                                            'assets/add_photo_icon.svg'),
-                                      ),
+                    Center(
+                      child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.grey,
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                "",
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => Center(
+                                    child: SizedBox(
+                                        width: 16.w,
+                                        height: 16.h,
+                                        child:
+                                        const CircularProgressIndicator(
+                                          strokeWidth: 1,
+                                        ))),
+                                errorWidget:
+                                    (context, url, error) =>
+                                    SvgPicture.asset(
+                                      'assets/avatar_icon.svg',
+                                      width: 25.w,
+                                      height: 31.h,
+                                      fit: BoxFit.scaleDown,
                                     ),
-                                  )
-                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          )),
                     ),
+                    Positioned(
+                      right: 10,
+                      bottom: 10,
+                      child: InkWell(
+                        onTap: () {
+                          // chooseImage();
+                        },
+                        child: Container(
+                          width: 34.w,
+                          height: 34.h,
+                          padding: const EdgeInsets.all(4),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle, // circular shape
+                            gradient: LinearGradient(
+                              colors: [
+                                LightModeColor.linerFirst.color,
+                                LightModeColor.linerSecond.color,
+                              ],
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0.0, 1.0), //(x,y)
+                                blurRadius: 6.0,
+                              ),
+                            ],
+                          ),
+                          child: SvgPicture.asset(
+                              'assets/add_photo_icon.svg'),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
