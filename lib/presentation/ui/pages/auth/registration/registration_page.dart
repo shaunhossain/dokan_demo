@@ -61,6 +61,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           Align(
                             alignment: Alignment.topCenter,
                             child: Card(
+                              elevation: 1,
                               shape: const CircleBorder(),
                               child: Stack(
                                 children: [
@@ -74,22 +75,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                             imageUrl:
                                             "",
                                             fit: BoxFit.cover,
-                                            placeholder: (context, url) =>
-                                            const Center(
+                                            placeholder: (context, url) => Center(
                                                 child: SizedBox(
-                                                    width: 16,
-                                                    height: 16,
+                                                    width: 16.w,
+                                                    height: 16.h,
                                                     child:
-                                                    CircularProgressIndicator(
+                                                    const CircularProgressIndicator(
                                                       strokeWidth: 1,
                                                     ))),
                                             errorWidget:
                                                 (context, url, error) =>
-                                                Icon(
-                                                  Icons.error,
-                                                  color: Theme.of(context)
-                                                      .highlightColor,
-                                                ),
+                                                    SvgPicture.asset(
+                                                        'assets/avatar_icon.svg',
+                                                      width: 25.w,
+                                                      height: 31.h,
+                                                      fit: BoxFit.scaleDown,
+                                                    ),
                                           ),
                                         ),
                                       )),
