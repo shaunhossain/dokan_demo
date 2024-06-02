@@ -18,7 +18,8 @@ enum LightModeColor{
   shortByText(Color(0xFF818995)),
   shortByIcon(Color(0xFFA0A9BD)),
   searchMenuIcon(Color(0xFF222455)),
-  
+  divider(Color(0xFFD8D8D8)),
+
   productRegularPrice(Color(0xFF989FA8)),
   fullStar(Color(0xFFF5A623)),
   emptyStar(Color(0xFFD3D8E5)),

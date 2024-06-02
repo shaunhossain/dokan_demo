@@ -3,6 +3,7 @@ import 'package:dokan_demo/core/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -13,6 +14,11 @@ class AppTheme {
       splashColor: LightModeColor.primary.color,
       scaffoldBackgroundColor: LightModeColor.primary.color,
       primaryColor: LightModeColor.primary.color,
+
+      appBarTheme: AppBarTheme(
+        surfaceTintColor: LightModeColor.white.color,
+        color: LightModeColor.white.color,
+      ),
 
       cardTheme: CardTheme(
         elevation: 2,
@@ -28,6 +34,7 @@ class AppTheme {
         helperStyle: robotoBLStyle(LightModeColor.hint.color),
         errorStyle: robotoBLStyle(LightModeColor.button.color),
         hintStyle: robotoBLStyle(LightModeColor.hint.color),
+        contentPadding: EdgeInsets.only(left: 19.w,top: 15.h,bottom: 15.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
@@ -76,6 +83,10 @@ class AppTheme {
     brightness: Brightness.light,
     splashColor: DarkModeColor.primary.color,
     scaffoldBackgroundColor: DarkModeColor.primary.color,
+      appBarTheme: AppBarTheme(
+        surfaceTintColor: DarkModeColor.white.color,
+        color: DarkModeColor.white.color,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: DarkModeColor.white.color,
         filled: true,
@@ -84,6 +95,7 @@ class AppTheme {
         helperStyle: robotoBLStyle(DarkModeColor.hint.color),
         errorStyle: robotoBLStyle(DarkModeColor.button.color),
         hintStyle: robotoBLStyle(DarkModeColor.hint.color),
+        contentPadding: EdgeInsets.only(left: 19.w,top: 15.h,bottom: 15.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(

@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:dokan_demo/core/app_colors.dart';
 import 'package:dokan_demo/core/styles.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:dokan_demo/presentation/ui/widgets/profile/custom_expanded_tile.dart';
+import 'package:dokan_demo/presentation/ui/widgets/profile/custom_profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,79 +17,259 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final GlobalKey<NestedScrollViewState> nestedScrollKey = GlobalKey();
 
+  bool isAccountExpand = false;
+  bool isPasswordExpand = false;
+  bool isNotificationExpand = false;
+  bool isWishListExpand = false;
+
+  final GlobalKey<FormState> fromValidationKey = GlobalKey<FormState>();
+  late TextEditingController _userName;
+  late TextEditingController _email;
+
+  late TextEditingController _address;
+  late TextEditingController _optional;
+  late TextEditingController _zipCode;
+  bool isObscurePassword = true;
+
+  @override
+  void initState() {
+    _userName = TextEditingController();
+    _email = TextEditingController();
+    _address = TextEditingController();
+    _optional = TextEditingController();
+    _zipCode = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text("My Account",style: robotoH6Style(LightModeColor.searchMenuIcon.color),),
+        title: Text(
+          "My Account",
+          style: robotoH6Style(LightModeColor.searchMenuIcon.color),
+        ),
         centerTitle: true,
       ),
-      body: NestedScrollView(
+      body: CustomScrollView(
         key: nestedScrollKey,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  DottedBorder(
-                      borderType: BorderType.Circle,
-                      dashPattern: const [2, 5],
-                      color: LightModeColor.radio.color,
-                      child: Container(
-                        width: 120.w,
-                        height: 120.h,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: CircleAvatar(
-                              radius: 50,
-                              backgroundColor: Colors.white,
-                              child: AspectRatio(
-                                aspectRatio: 1,
-                                child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                    "",
-                                    fit: BoxFit.cover,
-                                    placeholder: (context, url) => Center(
-                                        child: SizedBox(
-                                            width: 16.w,
-                                            height: 16.h,
-                                            child:
-                                            const CircularProgressIndicator(
-                                              strokeWidth: 1,
-                                            ))),
-                                    errorWidget:
-                                        (context, url, error) =>
-                                        SvgPicture.asset(
-                                          'assets/avatar_icon.svg',
-                                          width: 25.w,
-                                          height: 31.h,
-                                          fit: BoxFit.scaleDown,
-                                        ),
+        slivers: [
+          const SliverToBoxAdapter(
+            child: CustomProfileHeader(
+                imageUrl: "", name: "John Smith", email: "info@johnsmith.com"),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                padding: const EdgeInsets.all(22),
+                margin: EdgeInsets.only(bottom: 40.h),
+                decoration: BoxDecoration(
+                  color: LightModeColor.white.color,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    CustomExpandedTile(
+                      index: 0,
+                      onExpansionChanged: (value) {
+                        setState(() {
+                          isAccountExpand = value;
+                        });
+                      },
+                      isExpand: isAccountExpand,
+                      title: Text(
+                        "Account",
+                        style: robotoBLStyle(LightModeColor.black.color),
+                      ),
+                      leadingIcon: "assets/profile_icon.svg",
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Form(
+                              key: fromValidationKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Email",style: robotoBMMStyle(LightModeColor.activeExpandIcon.color),),
+                                  SizedBox(height: 12.h,),
+                                  TextFormField(
+                                    style: robotoBLStyle(Colors.black),
+                                    controller: _email,
+                                    keyboardType: TextInputType.emailAddress,
+                                    // validator: validateEmail,
+                                    decoration: const InputDecoration(
+                                      hintText: "youremail@xmail.com",
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Text("Full Name",style: robotoBMMStyle(LightModeColor.activeExpandIcon.color),),
+                                  SizedBox(height: 12.h,),
+                                  TextFormField(
+                                    style: robotoBLStyle(Colors.black),
+                                    controller: _userName,
+                                    keyboardType: TextInputType.name,
+                                    // validator: validateEmail,
+                                    decoration: const InputDecoration(
+                                      hintText: "William Bennett",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Text("Street Address",style: robotoBMMStyle(LightModeColor.activeExpandIcon.color),),
+                                  SizedBox(height: 12.h,),
+                                  TextFormField(
+                                    style: robotoBLStyle(Colors.black),
+                                    controller: _address,
+                                    keyboardType: TextInputType.streetAddress,
+                                    // validator: validateEmail,
+                                    decoration: const InputDecoration(
+                                      hintText: "465 Nolan Causeway Suite 079",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Text("Apt, Suite, Bldg (optional)",style: robotoBMMStyle(LightModeColor.activeExpandIcon.color),),
+                                  SizedBox(height: 12.h,),
+                                  TextFormField(
+                                    style: robotoBLStyle(Colors.black),
+                                    controller: _optional,
+                                    keyboardType: TextInputType.text,
+                                    // validator: validateEmail,
+                                    decoration: const InputDecoration(
+                                      hintText: "Unit 512",
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Text("Zip Code",style: robotoBMMStyle(LightModeColor.activeExpandIcon.color),),
+                                  SizedBox(height: 12.h,),
+                                  SizedBox(
+                                    width: 86.w,
+                                    child: TextFormField(
+                                      style: robotoBLStyle(Colors.black),
+                                      controller: _zipCode,
+                                      keyboardType: TextInputType.number,
+                                      // validator: validateEmail,
+                                      decoration: const InputDecoration(
+                                        hintText: "77017",
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 24.h,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor: WidgetStateProperty.all(LightModeColor.white.color),
+                                          fixedSize: WidgetStateProperty.all(Size(135.w, 50.h)),
+                                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                            side: BorderSide(width: 0.5,color: LightModeColor.shadowStroke.color)
+                                          )),
+                                        ),
+                                          onPressed: (){}, child: Text("Cancel",style: latoBLBoldStyle(LightModeColor.cancelButtonText.color),)),
+                                      ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: WidgetStateProperty.all(LightModeColor.saveButton.color),
+                                            fixedSize: WidgetStateProperty.all(Size(135.w, 50.h)),
+                                            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
+                                            )),
+                                          ),
+                                          onPressed: (){}, child: Text("Save",style: robotoBLBoldStyle(LightModeColor.white.color)))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 42.h,
+                                  ),
+                                ],
                               )),
                         ),
-                      )),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Text("John Smith",style: latoH5Style(LightModeColor.black.color),),
-                  SizedBox(
-                    height: 6.h,
-                  ),
-                  Text("info@johnsmith.com",style: latoBMRegularStyle(LightModeColor.mailText.color),),
-                ],
+                      ],
+                    ),
+                    Divider(
+                      height: 0.5,
+                      color: LightModeColor.divider.color,
+                    ),
+                    CustomExpandedTile(
+                      index: 0,
+                      onExpansionChanged: (value) {
+                        setState(() {
+                          isPasswordExpand = value;
+                        });
+                      },
+                      isExpand: isPasswordExpand,
+                      title: Text(
+                        "Passwords",
+                        style: robotoBLStyle(LightModeColor.black.color),
+                      ),
+                      leadingIcon: 'assets/password_icon.svg',
+                      children: [],
+                    ),
+                    Divider(
+                      height: 0.5,
+                      color: LightModeColor.divider.color,
+                    ),
+                    CustomExpandedTile(
+                      index: 0,
+                      onExpansionChanged: (value) {
+                        setState(() {
+                          isNotificationExpand = value;
+                        });
+                      },
+                      isExpand: isNotificationExpand,
+                      title: Text(
+                        "Notification",
+                        style: robotoBLStyle(LightModeColor.black.color),
+                      ),
+                      leadingIcon: 'assets/notification_icon.svg',
+                      children: [],
+                    ),
+                    Divider(
+                      height: 0.5,
+                      color: LightModeColor.divider.color,
+                    ),
+                    CustomExpandedTile(
+                      index: 0,
+                      onExpansionChanged: (value) {
+                        setState(() {
+                          isWishListExpand = value;
+                        });
+                      },
+                      isExpand: isWishListExpand,
+                      title: Text.rich(TextSpan(children: [
+                        TextSpan(
+                          text: "Wishlist ",
+                          style: robotoBLStyle(LightModeColor.black.color),
+                        ),
+                        TextSpan(
+                          text: "(00)",
+                          style:
+                              robotoBLStyle(LightModeColor.profileIcon.color),
+                        )
+                      ])),
+                      leadingIcon: 'assets/wish_list_icon.svg',
+                      children: [],
+                    ),
+                  ],
+                ),
               ),
-            )
-          ];
-        },
-        body: Container(),
-      ),);
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
