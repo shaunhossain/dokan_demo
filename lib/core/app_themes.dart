@@ -13,6 +13,12 @@ class AppTheme {
       splashColor: LightModeColor.primary.color,
       scaffoldBackgroundColor: LightModeColor.primary.color,
 
+      cardTheme: CardTheme(
+        elevation: 2,
+        surfaceTintColor: LightModeColor.white.color,
+        color: LightModeColor.white.color
+      ),
+
       inputDecorationTheme: InputDecorationTheme(
         fillColor: LightModeColor.white.color,
         filled: true,

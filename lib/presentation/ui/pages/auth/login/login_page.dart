@@ -1,9 +1,11 @@
 import 'package:dokan_demo/core/app_colors.dart';
 import 'package:dokan_demo/core/styles.dart';
+import 'package:dokan_demo/presentation/navigation/page_name.dart';
 import 'package:dokan_demo/presentation/ui/widgets/auth/social_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -54,14 +56,14 @@ class _LoginPageState extends State<LoginPage> {
                 fit: BoxFit.scaleDown,
               ),
               SizedBox(
-                height: 70.h,
+                height: 65.h,
               ),
               Text(
                 "Sign In",
                 style: robotoH5Style(Colors.black),
               ),
               SizedBox(
-                height: 30.h,
+                height: 35.h,
               ),
               Form(
                   key: fromValidationKey,
@@ -110,23 +112,23 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: obscurePassword,
                             child: isObscurePassword
                                 ? SvgPicture.asset(
-                                    "assets/hide_password_icon.svg",
-                                    width: 23.w,
-                                    height: 20.h,
-                                    fit: BoxFit.scaleDown,
-                                    color: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .iconColor,
-                                  )
+                              "assets/hide_password_icon.svg",
+                              width: 23.w,
+                              height: 20.h,
+                              fit: BoxFit.scaleDown,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .iconColor,
+                            )
                                 : SvgPicture.asset(
-                                    "assets/show_password_icon.svg",
-                                    width: 23.w,
-                                    height: 20.h,
-                                    fit: BoxFit.scaleDown,
-                                    color: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .iconColor,
-                                  ),
+                              "assets/show_password_icon.svg",
+                              width: 23.w,
+                              height: 20.h,
+                              fit: BoxFit.scaleDown,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .iconColor,
+                            ),
                           ),
                           hintText: "Password",
                         ),
@@ -194,11 +196,13 @@ class _LoginPageState extends State<LoginPage> {
                       Align(
                         alignment: Alignment.center,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.push(PagesName.registrationPage.path);
+                            },
                             child: Text(
                               "Create New Account",
                               style:
-                                  robotoBLThinStyle(LightModeColor.text.color),
+                              robotoBLThinStyle(LightModeColor.text.color),
                             )),
                       ),
                       SizedBox(
