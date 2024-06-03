@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dokan_demo/core/app_colors.dart';
 import 'package:dokan_demo/core/styles.dart';
+import 'package:dokan_demo/presentation/ui/widgets/home/custom_search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,23 +39,7 @@ class HomePage extends StatelessWidget {
             SliverPadding(
               padding: EdgeInsets.only(bottom: 30.h, top: 10.h),
               sliver: SliverToBoxAdapter(
-                child: Container(
-                  width: double.maxFinite,
-                  height: 60.h,
-                  decoration: BoxDecoration(
-                    color: LightModeColor.white.color,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: LightModeColor.shadowStroke.color,
-                        spreadRadius: 0.01,
-                        blurRadius: 0.01,
-                        blurStyle: BlurStyle.solid,
-                        offset: const Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                ),
+                child: CustomSearchView(onFilter: () {}, onShortBy: () {}),
               ),
             ),
             SliverGrid(
