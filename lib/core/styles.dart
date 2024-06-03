@@ -38,3 +38,10 @@ TextStyle latoBLBoldStyle(Color color) =>
     GoogleFonts.lato(fontSize: 17.sp, fontWeight: FontWeight.bold, color: color);
 TextStyle latoBMRegularStyle(Color color) =>
     GoogleFonts.lato(fontSize: 15.sp, fontWeight: FontWeight.normal, color: color);
+
+TextStyle latoBMRegularCrossLineStyle(Color color) => GoogleFonts.lato(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.normal,
+    color: color,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: color);
