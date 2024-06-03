@@ -1,6 +1,7 @@
 import 'package:dokan_demo/core/app_themes.dart';
 import 'package:dokan_demo/injection.dart';
 import 'package:dokan_demo/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:dokan_demo/presentation/bloc/trigger_bottom_sheet_cubit/trigger_bottom_sheet_cubit.dart';
 import 'package:dokan_demo/presentation/navigation/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => getIt<BottomNavigationBloc>()),
+            BlocProvider(create: (context) => getIt<TriggerBottomSheetCubit>()),
           ],
           child: SafeArea(
             child: MaterialApp.router(

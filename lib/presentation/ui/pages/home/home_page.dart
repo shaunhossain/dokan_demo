@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dokan_demo/core/app_colors.dart';
 import 'package:dokan_demo/core/styles.dart';
+import 'package:dokan_demo/presentation/bloc/trigger_bottom_sheet_cubit/trigger_bottom_sheet_cubit.dart';
 import 'package:dokan_demo/presentation/ui/widgets/home/custom_search_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +41,11 @@ class HomePage extends StatelessWidget {
             SliverPadding(
               padding: EdgeInsets.only(bottom: 30.h, top: 10.h),
               sliver: SliverToBoxAdapter(
-                child: CustomSearchView(onFilter: () {}, onShortBy: () {}),
+                child: CustomSearchView(
+                    onFilter: () {},
+                    onShortBy: () {
+                      context.read<TriggerBottomSheetCubit>().openSheet();
+                    }),
               ),
             ),
             SliverGrid(
@@ -47,7 +53,7 @@ class HomePage extends StatelessWidget {
                   crossAxisCount: 2,
                   childAspectRatio: 0.60,
                   mainAxisSpacing: 14.h,
-                  crossAxisSpacing: 14.h),
+                  crossAxisSpacing: 14.w),
               delegate: SliverChildBuilderDelegate((context, index) {
                 return Wrap(
                   children: [
