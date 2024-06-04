@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dokan_demo/core/cache/auth_cache_manager.dart';
-import 'package:dokan_demo/data/repository/user_repository.dart';
+import 'package:dokan_demo/data/repository/auth_repository.dart';
 import 'package:dokan_demo/domain/error_response/error_response.dart';
 import 'package:dokan_demo/domain/login_response/login_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +15,7 @@ part 'auth_bloc.g.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final UserRepository repository;
+  final AuthRepository repository;
 
   AuthBloc(this.repository) : super(const AuthState()) {
     on<AuthEvent>((event, emit) async {

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:dokan_demo/data/repository/user_repository.dart';
+import 'package:dokan_demo/data/repository/auth_repository.dart';
 import 'package:dokan_demo/domain/error_response/error_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -12,7 +12,7 @@ part 'registration_bloc.freezed.dart';
 
 @injectable
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
-  final UserRepository repository;
+  final AuthRepository repository;
 
   RegistrationBloc(this.repository) : super(const RegistrationState.initial()) {
     on<RegistrationEvent>((event, emit) async {
