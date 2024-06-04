@@ -1,6 +1,8 @@
 import 'package:dokan_demo/core/app_themes.dart';
 import 'package:dokan_demo/injection.dart';
+import 'package:dokan_demo/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:dokan_demo/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:dokan_demo/presentation/bloc/registation_bloc/registration_bloc.dart';
 import 'package:dokan_demo/presentation/bloc/trigger_bottom_sheet_cubit/trigger_bottom_sheet_cubit.dart';
 import 'package:dokan_demo/presentation/navigation/route.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => getIt<BottomNavigationBloc>()),
             BlocProvider(create: (context) => getIt<TriggerBottomSheetCubit>()),
+            BlocProvider(create: (context) => getIt<AuthBloc>()),
+            BlocProvider(create: (context) => getIt<RegistrationBloc>()),
           ],
           child: SafeArea(
             child: MaterialApp.router(
