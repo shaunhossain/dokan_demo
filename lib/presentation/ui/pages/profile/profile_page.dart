@@ -5,7 +5,6 @@ import 'package:dokan_demo/presentation/ui/widgets/profile/custom_expanded_tile.
 import 'package:dokan_demo/presentation/ui/widgets/profile/custom_profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -57,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
         slivers: [
           const SliverToBoxAdapter(
             child: CustomProfileHeader(
-                imageUrl: "", name: "John Smith", email: "info@johnsmith.com"),
+                imageUrl: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", name: "John Smith", email: "info@johnsmith.com"),
           ),
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
