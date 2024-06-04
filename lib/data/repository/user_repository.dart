@@ -5,7 +5,6 @@ import 'package:dokan_demo/domain/error_response/error_response.dart';
 import 'package:dokan_demo/domain/login_response/login_response.dart';
 import 'package:dokan_demo/domain/profile_response/profile_response.dart';
 import 'package:dokan_demo/domain/registration_response/registration_response.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class UserRepository {
