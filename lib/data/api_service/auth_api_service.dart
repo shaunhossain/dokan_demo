@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:dokan_demo/core/endpoints/api_endpoints.dart';
 import 'package:dokan_demo/domain/error_response/error_response.dart';
 import 'package:dokan_demo/domain/login_response/login_response.dart';
+import 'package:dokan_demo/domain/registration_error_response/registration_error_response.dart';
 import 'package:dokan_demo/domain/registration_response/registration_response.dart';
 
 abstract class AuthApiService {
@@ -20,7 +21,7 @@ abstract class AuthApiService {
       {required String userName,
         required String password});
 
-  Future<Either<ErrorResponse, List<RegistrationResponse>>> signUp(
+  Future<Either<RegistrationErrorResponse, List<RegistrationResponse>>> signUp(
       {required String username,
         required String email,
         required String password});

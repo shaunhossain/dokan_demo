@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dokan_demo/data/repository/auth_repository.dart';
-import 'package:dokan_demo/domain/error_response/error_response.dart';
+import 'package:dokan_demo/domain/registration_error_response/registration_error_response.dart';
+import 'package:dokan_demo/domain/registration_response/registration_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,18 +19,26 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<RegistrationEvent>((event, emit) async {
       await event.map(signUp: (_SignUp req) async {
         emit(const RegistrationState.isLoading());
-        final result = await repository.signUp(username: req.userName, email: req.email, password: req.password);
+        if(req.password == req.confirmPassword){
+          print("check pass");
+          final result = await repository.signUp(username: req.userName, email: req.email, password: req.password);
 
-        result.fold(
-          (l) => emit(RegistrationState.isError(l)),
-          (r) {
-            if (r.first.code == 200) {
-              emit(const RegistrationState.registered(true));
-            } else {
-              emit(const RegistrationState.registered(false));
-            }
-          },
-        );
+          result.fold(
+                (l) => emit(RegistrationState.isError(l)),
+                (r) {
+              if (r.first.code == 200) {
+                emit(RegistrationState.registered(true,r.first));
+              } else {
+                emit(const RegistrationState.registered(false,null));
+              }
+            },
+          );
+        }else{
+          print("check fail");
+          emit(const RegistrationState.isError(RegistrationErrorResponse(
+            message: "Password doesn't match"
+          )));
+        }
       });
     });
   }

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dokan_demo/data/api_service/auth_api_service.dart';
 import 'package:dokan_demo/domain/error_response/error_response.dart';
 import 'package:dokan_demo/domain/login_response/login_response.dart';
+import 'package:dokan_demo/domain/registration_error_response/registration_error_response.dart';
 import 'package:dokan_demo/domain/registration_response/registration_response.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,7 +14,7 @@ abstract class AuthRepository {
   Future<Either<ErrorResponse, List<LoginResponse>>> login(
       {required String userName,
         required String password});
-  Future<Either<ErrorResponse, List<RegistrationResponse>>> signUp(
+  Future<Either<RegistrationErrorResponse, List<RegistrationResponse>>> signUp(
       {required String username,
         required String email,
         required String password});
@@ -29,7 +30,7 @@ class IAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<Either<ErrorResponse, List<RegistrationResponse>>> signUp({required String username, required String email, required String password}) {
+  Future<Either<RegistrationErrorResponse, List<RegistrationResponse>>> signUp({required String username, required String email, required String password}) {
     return authApiService.signUp(username: username, email: email, password: password);
   }
 

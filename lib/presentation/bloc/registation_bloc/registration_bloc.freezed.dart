@@ -16,28 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RegistrationEvent {
-  String get firstName => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get confirmPassword => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String firstName, String userName, String email, String password)
+    required TResult Function(String userName, String email, String password,
+            String confirmPassword)
         signUp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String firstName, String userName, String email, String password)?
+    TResult? Function(String userName, String email, String password,
+            String confirmPassword)?
         signUp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String firstName, String userName, String email, String password)?
+    TResult Function(String userName, String email, String password,
+            String confirmPassword)?
         signUp,
     required TResult orElse(),
   }) =>
@@ -70,7 +70,8 @@ abstract class $RegistrationEventCopyWith<$Res> {
           RegistrationEvent value, $Res Function(RegistrationEvent) then) =
       _$RegistrationEventCopyWithImpl<$Res, RegistrationEvent>;
   @useResult
-  $Res call({String firstName, String userName, String email, String password});
+  $Res call(
+      {String userName, String email, String password, String confirmPassword});
 }
 
 /// @nodoc
@@ -86,16 +87,12 @@ class _$RegistrationEventCopyWithImpl<$Res, $Val extends RegistrationEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
     Object? userName = null,
     Object? email = null,
     Object? password = null,
+    Object? confirmPassword = null,
   }) {
     return _then(_value.copyWith(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -107,6 +104,10 @@ class _$RegistrationEventCopyWithImpl<$Res, $Val extends RegistrationEvent>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -120,7 +121,8 @@ abstract class _$$SignUpImplCopyWith<$Res>
       __$$SignUpImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String firstName, String userName, String email, String password});
+  $Res call(
+      {String userName, String email, String password, String confirmPassword});
 }
 
 /// @nodoc
@@ -134,16 +136,12 @@ class __$$SignUpImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
     Object? userName = null,
     Object? email = null,
     Object? password = null,
+    Object? confirmPassword = null,
   }) {
     return _then(_$SignUpImpl(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -156,6 +154,10 @@ class __$$SignUpImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -164,23 +166,23 @@ class __$$SignUpImplCopyWithImpl<$Res>
 
 class _$SignUpImpl implements _SignUp {
   const _$SignUpImpl(
-      {required this.firstName,
-      required this.userName,
+      {required this.userName,
       required this.email,
-      required this.password});
+      required this.password,
+      required this.confirmPassword});
 
-  @override
-  final String firstName;
   @override
   final String userName;
   @override
   final String email;
   @override
   final String password;
+  @override
+  final String confirmPassword;
 
   @override
   String toString() {
-    return 'RegistrationEvent.signUp(firstName: $firstName, userName: $userName, email: $email, password: $password)';
+    return 'RegistrationEvent.signUp(userName: $userName, email: $email, password: $password, confirmPassword: $confirmPassword)';
   }
 
   @override
@@ -188,18 +190,18 @@ class _$SignUpImpl implements _SignUp {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpImpl &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, firstName, userName, email, password);
+      Object.hash(runtimeType, userName, email, password, confirmPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -210,33 +212,33 @@ class _$SignUpImpl implements _SignUp {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String firstName, String userName, String email, String password)
+    required TResult Function(String userName, String email, String password,
+            String confirmPassword)
         signUp,
   }) {
-    return signUp(firstName, userName, email, password);
+    return signUp(userName, email, password, confirmPassword);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String firstName, String userName, String email, String password)?
+    TResult? Function(String userName, String email, String password,
+            String confirmPassword)?
         signUp,
   }) {
-    return signUp?.call(firstName, userName, email, password);
+    return signUp?.call(userName, email, password, confirmPassword);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String firstName, String userName, String email, String password)?
+    TResult Function(String userName, String email, String password,
+            String confirmPassword)?
         signUp,
     required TResult orElse(),
   }) {
     if (signUp != null) {
-      return signUp(firstName, userName, email, password);
+      return signUp(userName, email, password, confirmPassword);
     }
     return orElse();
   }
@@ -272,19 +274,19 @@ class _$SignUpImpl implements _SignUp {
 
 abstract class _SignUp implements RegistrationEvent {
   const factory _SignUp(
-      {required final String firstName,
-      required final String userName,
+      {required final String userName,
       required final String email,
-      required final String password}) = _$SignUpImpl;
+      required final String password,
+      required final String confirmPassword}) = _$SignUpImpl;
 
-  @override
-  String get firstName;
   @override
   String get userName;
   @override
   String get email;
   @override
   String get password;
+  @override
+  String get confirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$SignUpImplCopyWith<_$SignUpImpl> get copyWith =>
@@ -297,24 +299,27 @@ mixin _$RegistrationState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() isLoading,
-    required TResult Function(ErrorResponse errorResponse) isError,
-    required TResult Function(bool status) registered,
+    required TResult Function(RegistrationErrorResponse errorResponse) isError,
+    required TResult Function(bool status, RegistrationResponse? registration)
+        registered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? isLoading,
-    TResult? Function(ErrorResponse errorResponse)? isError,
-    TResult? Function(bool status)? registered,
+    TResult? Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult? Function(bool status, RegistrationResponse? registration)?
+        registered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? isLoading,
-    TResult Function(ErrorResponse errorResponse)? isError,
-    TResult Function(bool status)? registered,
+    TResult Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult Function(bool status, RegistrationResponse? registration)?
+        registered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -403,8 +408,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() isLoading,
-    required TResult Function(ErrorResponse errorResponse) isError,
-    required TResult Function(bool status) registered,
+    required TResult Function(RegistrationErrorResponse errorResponse) isError,
+    required TResult Function(bool status, RegistrationResponse? registration)
+        registered,
   }) {
     return initial();
   }
@@ -414,8 +420,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? isLoading,
-    TResult? Function(ErrorResponse errorResponse)? isError,
-    TResult? Function(bool status)? registered,
+    TResult? Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult? Function(bool status, RegistrationResponse? registration)?
+        registered,
   }) {
     return initial?.call();
   }
@@ -425,8 +432,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? isLoading,
-    TResult Function(ErrorResponse errorResponse)? isError,
-    TResult Function(bool status)? registered,
+    TResult Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult Function(bool status, RegistrationResponse? registration)?
+        registered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -517,8 +525,9 @@ class _$IsLoadingImpl implements _IsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() isLoading,
-    required TResult Function(ErrorResponse errorResponse) isError,
-    required TResult Function(bool status) registered,
+    required TResult Function(RegistrationErrorResponse errorResponse) isError,
+    required TResult Function(bool status, RegistrationResponse? registration)
+        registered,
   }) {
     return isLoading();
   }
@@ -528,8 +537,9 @@ class _$IsLoadingImpl implements _IsLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? isLoading,
-    TResult? Function(ErrorResponse errorResponse)? isError,
-    TResult? Function(bool status)? registered,
+    TResult? Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult? Function(bool status, RegistrationResponse? registration)?
+        registered,
   }) {
     return isLoading?.call();
   }
@@ -539,8 +549,9 @@ class _$IsLoadingImpl implements _IsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? isLoading,
-    TResult Function(ErrorResponse errorResponse)? isError,
-    TResult Function(bool status)? registered,
+    TResult Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult Function(bool status, RegistrationResponse? registration)?
+        registered,
     required TResult orElse(),
   }) {
     if (isLoading != null) {
@@ -597,9 +608,9 @@ abstract class _$$IsErrorImplCopyWith<$Res> {
           _$IsErrorImpl value, $Res Function(_$IsErrorImpl) then) =
       __$$IsErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ErrorResponse errorResponse});
+  $Res call({RegistrationErrorResponse errorResponse});
 
-  $ErrorResponseCopyWith<$Res> get errorResponse;
+  $RegistrationErrorResponseCopyWith<$Res> get errorResponse;
 }
 
 /// @nodoc
@@ -619,14 +630,15 @@ class __$$IsErrorImplCopyWithImpl<$Res>
       null == errorResponse
           ? _value.errorResponse
           : errorResponse // ignore: cast_nullable_to_non_nullable
-              as ErrorResponse,
+              as RegistrationErrorResponse,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ErrorResponseCopyWith<$Res> get errorResponse {
-    return $ErrorResponseCopyWith<$Res>(_value.errorResponse, (value) {
+  $RegistrationErrorResponseCopyWith<$Res> get errorResponse {
+    return $RegistrationErrorResponseCopyWith<$Res>(_value.errorResponse,
+        (value) {
       return _then(_value.copyWith(errorResponse: value));
     });
   }
@@ -638,7 +650,7 @@ class _$IsErrorImpl implements _IsError {
   const _$IsErrorImpl(this.errorResponse);
 
   @override
-  final ErrorResponse errorResponse;
+  final RegistrationErrorResponse errorResponse;
 
   @override
   String toString() {
@@ -668,8 +680,9 @@ class _$IsErrorImpl implements _IsError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() isLoading,
-    required TResult Function(ErrorResponse errorResponse) isError,
-    required TResult Function(bool status) registered,
+    required TResult Function(RegistrationErrorResponse errorResponse) isError,
+    required TResult Function(bool status, RegistrationResponse? registration)
+        registered,
   }) {
     return isError(errorResponse);
   }
@@ -679,8 +692,9 @@ class _$IsErrorImpl implements _IsError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? isLoading,
-    TResult? Function(ErrorResponse errorResponse)? isError,
-    TResult? Function(bool status)? registered,
+    TResult? Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult? Function(bool status, RegistrationResponse? registration)?
+        registered,
   }) {
     return isError?.call(errorResponse);
   }
@@ -690,8 +704,9 @@ class _$IsErrorImpl implements _IsError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? isLoading,
-    TResult Function(ErrorResponse errorResponse)? isError,
-    TResult Function(bool status)? registered,
+    TResult Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult Function(bool status, RegistrationResponse? registration)?
+        registered,
     required TResult orElse(),
   }) {
     if (isError != null) {
@@ -739,9 +754,10 @@ class _$IsErrorImpl implements _IsError {
 }
 
 abstract class _IsError implements RegistrationState {
-  const factory _IsError(final ErrorResponse errorResponse) = _$IsErrorImpl;
+  const factory _IsError(final RegistrationErrorResponse errorResponse) =
+      _$IsErrorImpl;
 
-  ErrorResponse get errorResponse;
+  RegistrationErrorResponse get errorResponse;
   @JsonKey(ignore: true)
   _$$IsErrorImplCopyWith<_$IsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -753,7 +769,9 @@ abstract class _$$RegisteredImplCopyWith<$Res> {
           _$RegisteredImpl value, $Res Function(_$RegisteredImpl) then) =
       __$$RegisteredImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool status});
+  $Res call({bool status, RegistrationResponse? registration});
+
+  $RegistrationResponseCopyWith<$Res>? get registration;
 }
 
 /// @nodoc
@@ -768,27 +786,46 @@ class __$$RegisteredImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? registration = freezed,
   }) {
     return _then(_$RegisteredImpl(
       null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
+      freezed == registration
+          ? _value.registration
+          : registration // ignore: cast_nullable_to_non_nullable
+              as RegistrationResponse?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RegistrationResponseCopyWith<$Res>? get registration {
+    if (_value.registration == null) {
+      return null;
+    }
+
+    return $RegistrationResponseCopyWith<$Res>(_value.registration!, (value) {
+      return _then(_value.copyWith(registration: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$RegisteredImpl implements _Registered {
-  const _$RegisteredImpl(this.status);
+  const _$RegisteredImpl(this.status, this.registration);
 
   @override
   final bool status;
+  @override
+  final RegistrationResponse? registration;
 
   @override
   String toString() {
-    return 'RegistrationState.registered(status: $status)';
+    return 'RegistrationState.registered(status: $status, registration: $registration)';
   }
 
   @override
@@ -796,11 +833,13 @@ class _$RegisteredImpl implements _Registered {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisteredImpl &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.registration, registration) ||
+                other.registration == registration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
+  int get hashCode => Object.hash(runtimeType, status, registration);
 
   @JsonKey(ignore: true)
   @override
@@ -813,10 +852,11 @@ class _$RegisteredImpl implements _Registered {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() isLoading,
-    required TResult Function(ErrorResponse errorResponse) isError,
-    required TResult Function(bool status) registered,
+    required TResult Function(RegistrationErrorResponse errorResponse) isError,
+    required TResult Function(bool status, RegistrationResponse? registration)
+        registered,
   }) {
-    return registered(status);
+    return registered(status, registration);
   }
 
   @override
@@ -824,10 +864,11 @@ class _$RegisteredImpl implements _Registered {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? isLoading,
-    TResult? Function(ErrorResponse errorResponse)? isError,
-    TResult? Function(bool status)? registered,
+    TResult? Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult? Function(bool status, RegistrationResponse? registration)?
+        registered,
   }) {
-    return registered?.call(status);
+    return registered?.call(status, registration);
   }
 
   @override
@@ -835,12 +876,13 @@ class _$RegisteredImpl implements _Registered {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? isLoading,
-    TResult Function(ErrorResponse errorResponse)? isError,
-    TResult Function(bool status)? registered,
+    TResult Function(RegistrationErrorResponse errorResponse)? isError,
+    TResult Function(bool status, RegistrationResponse? registration)?
+        registered,
     required TResult orElse(),
   }) {
     if (registered != null) {
-      return registered(status);
+      return registered(status, registration);
     }
     return orElse();
   }
@@ -884,9 +926,12 @@ class _$RegisteredImpl implements _Registered {
 }
 
 abstract class _Registered implements RegistrationState {
-  const factory _Registered(final bool status) = _$RegisteredImpl;
+  const factory _Registered(
+          final bool status, final RegistrationResponse? registration) =
+      _$RegisteredImpl;
 
   bool get status;
+  RegistrationResponse? get registration;
   @JsonKey(ignore: true)
   _$$RegisteredImplCopyWith<_$RegisteredImpl> get copyWith =>
       throw _privateConstructorUsedError;
