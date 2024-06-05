@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dokan_demo/core/endpoints/api_endpoints.dart';
@@ -10,7 +9,6 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: UserApiService)
 class IUserApiService extends UserApiService {
-
   ErrorResponse checkResponseError(DioException err) {
     if (err.type == DioExceptionType.badResponse) {
       var errorData = err.response?.data;
@@ -22,9 +20,27 @@ class IUserApiService extends UserApiService {
   }
 
   @override
-  Future<Either<ErrorResponse, List<EditProfileResponse>>> editProfileInfo({required String name, required String firstName, required String lastName, required String email, required String description}) {
-    // TODO: implement editProfileInfo
-    throw UnimplementedError();
+  Future<Either<ErrorResponse, List<EditProfileResponse>>> editProfileInfo(
+      {required String name,
+      required String firstName,
+      required String lastName,
+      required String email,
+      required String description}) async {
+    try {
+      var registrationInfo = {
+        "name": name,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "description": description
+      };
+      Response response = await client.post(ApiEndpoints.updateUserProfileUrl,
+          data: registrationInfo);
+      var result = EditProfileResponse.fromJson(response.data);
+      return right([result]);
+    } on DioException catch (e) {
+      return left(checkResponseError(e));
+    }
   }
 
   @override
@@ -33,13 +49,10 @@ class IUserApiService extends UserApiService {
       Response response = await client.get(
         ApiEndpoints.userProfileUrl,
       );
-      print("profile_result ->$response");
       var result = ProfileResponse.fromJson(response.data);
       return right([result]);
     } on DioException catch (e) {
-      print("profile_error ->$e");
       return left(checkResponseError(e));
     }
   }
-
 }
