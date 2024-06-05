@@ -18,22 +18,17 @@ abstract class UserApiService {
       options.headers["Authorization"] = "Bearer $token";
       return handler.next(options);
     }, onError: (error, handler) async {
-      if (error.response?.statusCode == 401) {
-        if (!isRefreshing) {
-          isRefreshing = true;
-          final checkedAccessToken = await validateToken();
-          if (checkedAccessToken != null) {
-            client.options.headers["Authorization"] =
-                "Bearer $checkedAccessToken";
-            return handler.resolve(await client.fetch(error.requestOptions));
-          }
+      if (error.response?.statusCode == 401 || error.response?.statusCode == 403 || error.response?.statusCode == 404) {
+        final checkedAccessToken = await validateToken();
+        if (checkedAccessToken != null) {
+          client.options.headers["Authorization"] =
+              "Bearer $checkedAccessToken";
+          return handler.resolve(await client.fetch(error.requestOptions));
         }
       }
       return handler.next(error);
     }));
   }
-
-  bool isRefreshing = false;
 
   Future<String?> validateToken() async {
     try {
@@ -50,7 +45,6 @@ abstract class UserApiService {
       return null;
     } catch (e) {
       //AuthCacheManager.signOut();
-      isRefreshing = false;
       router.go(PagesName.loginPage.path);
     }
     return null;

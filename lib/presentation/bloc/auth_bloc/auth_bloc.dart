@@ -35,7 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               (r) {
                 if (r.first.token != null && r.first.token != "") {
                   AuthCacheManager.setToken(token: r.first.token);
-                  AuthCacheManager.setUserEmail(email: r.first.token!);
+                  AuthCacheManager.setUserEmail(email: r.first.userEmail!);
                   emit(
                     state.copyWith(
                       loginResponse: r.first,

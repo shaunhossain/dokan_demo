@@ -30,9 +30,11 @@ class IAuthApiService extends AuthApiService {
       });
       Response response = await client
           .post(ApiEndpoints.loginUrl, data: loginInfo);
+      print("login_response ->$response");
       var result = LoginResponse.fromJson(response.data);
       return right([result]);
     } on DioException catch (e) {
+      print("login_error ->$e");
       return left(checkResponseError(e));
     }
   }

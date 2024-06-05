@@ -1,9 +1,14 @@
 
+
 import 'package:dokan_demo/core/app_colors.dart';
+import 'package:dokan_demo/core/cache/auth_cache_manager.dart';
 import 'package:dokan_demo/core/styles.dart';
+import 'package:dokan_demo/presentation/bloc/user_profile_bloc/user_profile_bloc.dart';
+import 'package:dokan_demo/presentation/ui/widgets/loading_indicator.dart';
 import 'package:dokan_demo/presentation/ui/widgets/profile/custom_expanded_tile.dart';
 import 'package:dokan_demo/presentation/ui/widgets/profile/custom_profile_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -15,6 +20,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final GlobalKey<NestedScrollViewState> nestedScrollKey = GlobalKey();
+
+  String? _userEmail;
 
   bool isAccountExpand = false;
   bool isPasswordExpand = false;
@@ -32,12 +39,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
+    context.read<UserProfileBloc>().add(const UserProfileEvent.requestProfileInfo());
     _userName = TextEditingController();
     _email = TextEditingController();
     _address = TextEditingController();
     _optional = TextEditingController();
     _zipCode = TextEditingController();
+    _getUserMail();
     super.initState();
+  }
+
+  void _getUserMail() async {
+    _userEmail = await AuthCacheManager.getUserEmail();
   }
 
   @override
@@ -54,10 +67,24 @@ class _ProfilePageState extends State<ProfilePage> {
       body: CustomScrollView(
         key: nestedScrollKey,
         slivers: [
-          const SliverToBoxAdapter(
-            child: CustomProfileHeader(
-                imageUrl: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", name: "John Smith", email: "info@johnsmith.com"),
-          ),
+        BlocBuilder<UserProfileBloc,UserProfileState>(builder: (context,state){
+          if(state.status == UserProfileStatus.loading){
+           return const SliverPadding(
+             padding: EdgeInsets.all(16.0),
+             sliver: SliverToBoxAdapter(
+               child: LoadingIndicator(),
+             ),
+           );
+          }
+          if(state.status == UserProfileStatus.success){
+            return   SliverToBoxAdapter(
+              child: CustomProfileHeader(
+                  imageUrl: state.profile?.avatarUrls?.the96 ?? "",
+                  name: state.profile?.name ?? "", email: _userEmail ?? ""),
+            );
+          }
+          return const SliverToBoxAdapter();
+        }),
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             sliver: SliverToBoxAdapter(
