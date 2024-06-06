@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     context.read<ProductBloc>().add(const ProductEvent.getProducts());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,21 +53,26 @@ class _HomePageState extends State<HomePage> {
             SliverPadding(
               padding: EdgeInsets.only(bottom: 30.h, top: 10.h),
               sliver: SliverToBoxAdapter(
-                child: CustomSearchView(
-                    onFilter: () {},
-                    onShortBy: () {
-                      context.read<TriggerBottomSheetCubit>().openSheet();
-                    }),
+                child: CustomSearchView(onFilter: () {
+                  context
+                      .read<ProductBloc>()
+                      .add(const ProductEvent.filterProduct(name: "Rating"));
+                }, onShortBy: () {
+                 context.read<TriggerBottomSheetCubit>().openSheet();
+                 //  context
+                 //      .read<ProductBloc>()
+                 //      .add(const ProductEvent.filterProduct(name: "LowestPrice"));
+                }),
               ),
             ),
-            BlocBuilder<ProductBloc,ProductState>(builder: (context,state){
-              if(state.status == ProductStatus.success){
+            BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+              if (state.status == ProductStatus.success) {
                 return SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.55,
-                      mainAxisSpacing: 14.h,
-                      crossAxisSpacing: 14.w,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.55,
+                    mainAxisSpacing: 14.h,
+                    crossAxisSpacing: 14.w,
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return SizedBox(
@@ -91,18 +97,24 @@ class _HomePageState extends State<HomePage> {
                                     child: AspectRatio(
                                       aspectRatio: 1,
                                       child: CachedNetworkImage(
-                                        imageUrl: state.products?[index].images?.first.src ?? "",
+                                        imageUrl: state.products?[index].images
+                                                ?.first.src ??
+                                            "",
                                         fit: BoxFit.fill,
-                                        placeholder: (context, url) => const Center(
-                                            child: SizedBox(
-                                                width: 16,
-                                                height: 16,
-                                                child: CircularProgressIndicator(
-                                                  strokeWidth: 1,
-                                                ))),
-                                        errorWidget: (context, url, error) => Icon(
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                                child: SizedBox(
+                                                    width: 16,
+                                                    height: 16,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      strokeWidth: 1,
+                                                    ))),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(
                                           Icons.error,
-                                          color: Theme.of(context).highlightColor,
+                                          color:
+                                              Theme.of(context).highlightColor,
                                         ),
                                       ),
                                     ),
@@ -132,8 +144,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Row(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
                                           "\$${state.products?[index].regularPrice ?? 0}",
@@ -156,8 +169,11 @@ class _HomePageState extends State<HomePage> {
                                       height: 8.h,
                                     ),
                                     RatingBarIndicator(
-                                      rating: state.products?[index].ratingCount?.toDouble() ?? 0,
-                                      itemBuilder: (context, index) => const Icon(
+                                      rating: state.products?[index].ratingCount
+                                              ?.toDouble() ??
+                                          0,
+                                      itemBuilder: (context, index) =>
+                                          const Icon(
                                         Icons.star,
                                         color: Colors.amber,
                                       ),

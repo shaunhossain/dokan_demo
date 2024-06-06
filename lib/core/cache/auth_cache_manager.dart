@@ -25,8 +25,16 @@ class AuthCacheManager {
     return await CacheManager.getString(Key.email.keyValue);
   }
 
+  static Future<String?> getFilterType() async {
+    return await CacheManager.getString(Key.action.keyValue);
+  }
+
   static Future<void> setUserEmail({required String email}) async {
     await CacheManager.setString(Key.email.keyValue, email);
+  }
+
+  static Future<void> setFilterType({required String action}) async {
+    await CacheManager.setString(Key.action.keyValue, action);
   }
 
   static Future<void> setToken({required String? token}) async {

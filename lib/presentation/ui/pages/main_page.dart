@@ -1,4 +1,5 @@
 import 'package:dokan_demo/core/app_colors.dart';
+import 'package:dokan_demo/core/filter_type.dart';
 import 'package:dokan_demo/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:dokan_demo/presentation/bloc/trigger_bottom_sheet_cubit/trigger_bottom_sheet_cubit.dart';
 import 'package:dokan_demo/presentation/ui/pages/home/bottom_sheet/short_by_bottom_view.dart';
@@ -23,6 +24,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final filterList = [
+    FilterType.newest,
+    FilterType.oldest,
+    FilterType.highestPrice,
+    FilterType.lowPrice,
+    FilterType.bestSelling,
+  ];
 
   int selectedIndex = 0;
 
@@ -45,10 +53,11 @@ class _MainPageState extends State<MainPage> {
             state.map(
                 open: (req) {
                   Navigator.of(context).push(ModalBottomSheetRoute(
-                    builder: (context) => const ShortByBottomView(),
+                    builder: (context) => ShortByBottomView(filterList: filterList),
+                    showDragHandle: true,
                     isScrollControlled: true,
-                    isDismissible: true,
-                    enableDrag: false,
+                    isDismissible: false,
+                    enableDrag: true,
                     backgroundColor: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
@@ -58,7 +67,6 @@ class _MainPageState extends State<MainPage> {
                 initial: (value) {},
                 close: (req) {
                   context.pop();
-                  print("close bottom sheet");
                 });
           },
         )
@@ -72,7 +80,7 @@ class _MainPageState extends State<MainPage> {
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              navRoute(2);
+             // navRoute(2);
             },
             tooltip: 'Search',
             elevation: 2.0,
@@ -122,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                       selectedIndex: selectedIndex),
                   BottomNavItem(
                       onPress: () {
-                        navRoute(1);
+                       // navRoute(1);
                       },
                       icon: "assets/category_icon.svg",
                       index: 1,
@@ -132,7 +140,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   BottomNavItem(
                       onPress: () {
-                        navRoute(3);
+                       // navRoute(3);
                       },
                       icon: "assets/cart_icon.svg",
                       index: 3,

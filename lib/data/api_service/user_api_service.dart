@@ -34,10 +34,8 @@ abstract class UserApiService {
     try {
       String? token = await AuthCacheManager.getToken();
       var headers = {'Authorization': 'Bearer $token'};
-      print("validation_token_call");
       Response response = await client.get(ApiEndpoints.validationUrl,
           options: Options(headers: headers));
-      print("validation_token_status ->${response.statusCode}");
       var result = ValidateResponse.fromJson(response.data);
       if (result.data?.status == 200) {
         return token;

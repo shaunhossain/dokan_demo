@@ -19,6 +19,21 @@ class AppTheme {
         surfaceTintColor: LightModeColor.white.color,
         color: LightModeColor.white.color,
       ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.all(DarkModeColor.linerFirst.color),
+      ),
+      checkboxTheme: CheckboxThemeData(
+          overlayColor: WidgetStateProperty.all(LightModeColor.linerFirst.color),
+          checkColor: WidgetStateProperty.all(Colors.white),
+          side:
+          BorderSide(width: 1, color: LightModeColor.linerFirst.color),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+            side: BorderSide(
+                width: 1, color: LightModeColor.linerFirst.color),
+          )),
+
+      bottomSheetTheme: BottomSheetThemeData(dragHandleColor: LightModeColor.bottomSheetHeader.color),
 
       cardTheme: CardTheme(
         elevation: 2,
@@ -87,6 +102,29 @@ class AppTheme {
         surfaceTintColor: DarkModeColor.white.color,
         color: DarkModeColor.white.color,
       ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.all(DarkModeColor.linerFirst.color),
+      ),
+
+      checkboxTheme: CheckboxThemeData(
+          overlayColor: WidgetStateProperty.all(DarkModeColor.linerFirst.color),
+          checkColor: WidgetStateProperty.all(Colors.white),
+          side:
+          BorderSide(width: 1, color: DarkModeColor.linerFirst.color),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+            side: BorderSide(
+                width: 1, color: DarkModeColor.linerFirst.color),
+          )),
+
+      bottomSheetTheme: BottomSheetThemeData(dragHandleColor: DarkModeColor.bottomSheetHeader.color),
+
+      cardTheme: CardTheme(
+          elevation: 2,
+          surfaceTintColor: DarkModeColor.white.color,
+          color: DarkModeColor.white.color
+      ),
+
       inputDecorationTheme: InputDecorationTheme(
         fillColor: DarkModeColor.white.color,
         filled: true,

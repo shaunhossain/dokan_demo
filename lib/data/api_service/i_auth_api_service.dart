@@ -24,7 +24,6 @@ class IAuthApiService extends AuthApiService {
   RegistrationErrorResponse checkRegistrationResponseError(DioException err) {
     if (err.type == DioExceptionType.badResponse) {
       var errorData = err.response?.data;
-      print("reg_error ->$errorData");
       var errorModel = RegistrationErrorResponse.fromJson(errorData);
       return errorModel;
     } else {

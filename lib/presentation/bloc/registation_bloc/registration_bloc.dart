@@ -20,7 +20,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       await event.map(signUp: (_SignUp req) async {
         emit(const RegistrationState.isLoading());
         if(req.password == req.confirmPassword){
-          print("check pass");
           final result = await repository.signUp(username: req.userName, email: req.email, password: req.password);
 
           result.fold(
@@ -34,7 +33,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
             },
           );
         }else{
-          print("check fail");
           emit(const RegistrationState.isError(RegistrationErrorResponse(
             message: "Password doesn't match"
           )));

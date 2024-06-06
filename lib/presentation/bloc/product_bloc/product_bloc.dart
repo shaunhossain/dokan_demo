@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:dokan_demo/core/filter_type.dart';
 import 'package:dokan_demo/data/repository/user_repository.dart';
 import 'package:dokan_demo/domain/product_response/product_response.dart';
 import 'package:flutter/services.dart';
@@ -21,17 +22,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final UserRepository repository;
 
   ProductBloc(this.repository) : super(const ProductState()) {
+    final List<ProductResponse> productList = [];
     on<ProductEvent>((event, emit) async {
       await event.map(getProducts: (_GetProducts req) async {
         emit(state.copyWith(status: ProductStatus.loading));
        try{
          final String response = await rootBundle.loadString('assets/files/response.json');
          final data = await json.decode(response) as List<dynamic>;
-         final List<ProductResponse> productList = [];
+         productList.clear();
          for (var element in data) {
            final product = ProductResponse.fromJson(element);
            productList.add(product);
-           print("product_data ->${product.images?.last.src}");
          }
          if(productList.isNotEmpty){
            emit(state.copyWith(
@@ -51,7 +52,62 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
          ),);
        }
 
-      }, filterProduct: (_FilterProduct req) {  });
+      }, filterProduct: (_FilterProduct req) async {
+        emit(const ProductState());
+        if(req.name == FilterType.newest.action){
+          productList.sort((a,b){
+            return b.dateModified!.compareTo(a.dateModified!);
+          });
+          emit(state.copyWith(
+            products: productList,
+            status: ProductStatus.success,
+          ),);
+        }
+        if(req.name == FilterType.oldest.action){
+          productList.sort((a,b){
+            return a.dateModified!.compareTo(b.dateModified!);
+          });
+          emit(state.copyWith(
+            products: productList,
+            status: ProductStatus.success,
+          ),);
+        }
+
+        if(req.name == FilterType.lowPrice.action){
+          productList.sort((a,b){
+            int startPrice = int.parse(a.price!);
+            int comparePrice = int.parse(b.price!);
+            return startPrice.compareTo(comparePrice);
+          });
+          emit(state.copyWith(
+            products: productList,
+            status: ProductStatus.success,
+          ),);
+        }
+        if(req.name == FilterType.highestPrice.action){
+          productList.sort((a,b){
+            int startPrice = int.parse(b.price!);
+            int comparePrice = int.parse(a.price!);
+            return startPrice.compareTo(comparePrice);
+          });
+          emit(state.copyWith(
+            products: productList,
+            status: ProductStatus.success,
+          ),);
+        }
+
+        if(req.name == FilterType.bestSelling.action){
+          productList.sort((a,b){
+            int startPrice = b.ratingCount!;
+            int comparePrice = a.ratingCount!;
+            return startPrice.compareTo(comparePrice);
+          });
+          emit(state.copyWith(
+            products: productList,
+            status: ProductStatus.success,
+          ),);
+        }
+      });
     });
   }
 }
