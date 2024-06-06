@@ -41,7 +41,8 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
             }
           },
         );
-      }, editProfileInfo: (_EditProfileData req) async {
+      },
+          editProfileInfo: (_EditProfileData req) async {
         emit(const UserProfileState());
         final result = await repository.editProfileInfo(name: req.name, firstName: req.firstName, lastName: req.lastName, email: req.email, description: req.description);
         result.fold(
