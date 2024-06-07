@@ -72,7 +72,7 @@ class _ShortByBottomViewState extends State<ShortByBottomView> {
                             .add(ProductEvent.filterProduct(name: item.action));
                       });
                     },
-                    title: Text(item.title),
+                    title: Text(item.title,style: robotoBMMStyle(Colors.black),),
                   );
                 }).toList(),
               ),
