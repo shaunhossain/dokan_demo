@@ -52,14 +52,13 @@ flutter:
   assets:
     - assets/
     - assets/files/
+    - assets/flutter_splash.png
 
 flutter_native_splash:
-  android: true
-  ios: true
-  web: false
-
   color: "#FFFFFF"
-  image: assets/flutter_splash.png
+  image: assets/luncher_icon.png
   android_12:
-    color: "#FFFFFF"
-    image: assets/flutter_splash.png
+    image: assets/luncher_icon.png
+    icon_background_color: "#FFFFFF"
+
+  web: false
